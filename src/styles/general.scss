@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+#app {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+.main-container {
+  width: 100%;
+}
+
+.page-container {
+  padding: 30px;
+
+  @media (max-width: 372px) {
+    padding: 8px;
+  }
+}
