@@ -21,3 +21,19 @@ export type User = {
   name: string
   company: string
 }
+
+export type AssignedUser = {
+  id: number
+  name: string
+  email: string
+}
+
+export type Todo = {
+  id: number
+  title: string
+  description: string
+  assignedUser: AssignedUser
+}
+
+export type TodoForm = Omit<Todo, 'id' | 'assignedUser'> &
+  Omit<AssignedUser, 'id'>
