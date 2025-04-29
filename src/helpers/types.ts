@@ -16,3 +16,8 @@ export type ApiOptions = {
   wrapResponse?: (...args: any[]) => any
 }
 
+export type User = {
+  id: number
+  name: string
+  company: string
+}
