@@ -34,6 +34,7 @@ onMounted(() => {
 
 <template>
   <div class="form-container">
+    <h2>Cookies subtask</h2>
     <el-form :model="form" label-width="auto">
       <el-form-item>
         <el-checkbox v-model="form.save" name="save">
@@ -57,6 +58,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   .el-form {
     width: 400px;

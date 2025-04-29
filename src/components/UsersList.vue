@@ -63,6 +63,7 @@ onMounted(async () => {
 
 <template>
   <div class="wrapper">
+    <h2>Users list subtask</h2>
     <div class="list-container">
       <el-table :data="users" max-height="300" empty-text="No data">
         <el-table-column
@@ -123,16 +124,4 @@ onMounted(async () => {
   </div>
 </template>
 
-<style lang="scss" scoped>
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: min(600px, 100%);
-}
-</style>
+<style lang="scss" scoped></style>
