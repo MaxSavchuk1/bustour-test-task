@@ -4,6 +4,7 @@ import { User } from '@/helpers/types'
 const users = ref<User[]>([])
 const dialogVisible = ref(false)
 const editedUserId = ref<number | null>()
+const isLoading = ref(false)
 const userForm = reactive<Omit<User, 'id'>>({
   name: '',
   company: ''
@@ -50,13 +51,20 @@ watch(dialogVisible, v => {
 
 onMounted(async () => {
   await useApi().users.getUsers({
+    onRequest: () => {
+      isLoading.value = true
+    },
     onSuccess: response => {
       users.value = response.map((user: any) => ({
         id: user.id,
         name: user.name,
         company: user.company.name
       }))
-    }
+    },
+    onFinally: () => {
+      isLoading.value = false
+    },
+    silent: true
   })
 })
 </script>
@@ -65,7 +73,12 @@ onMounted(async () => {
   <div class="wrapper">
     <h2>Users list subtask</h2>
     <div class="list-container">
-      <el-table :data="users" max-height="300" empty-text="No data">
+      <el-table
+        v-loading="isLoading"
+        :data="users"
+        max-height="300"
+        empty-text="No data"
+      >
         <el-table-column
           prop="name"
           label="Name"
@@ -97,15 +110,20 @@ onMounted(async () => {
         </el-table-column>
       </el-table>
 
-      <el-button @click="dialogVisible = true">Add User</el-button>
+      <el-button @click="dialogVisible = true"> Add User </el-button>
 
       <!-- USER DIALOG -->
 
-      <el-dialog v-model="dialogVisible" title="Edit user" width="500">
+      <el-dialog
+        v-model="dialogVisible"
+        :title="editedUserId ? 'Edit User' : 'Add User'"
+        width="500"
+      >
         <el-form :model="userForm">
           <el-form-item label="Name" label-width="100px">
             <el-input v-model="userForm.name" autocomplete="off" />
           </el-form-item>
+
           <el-form-item label="Company" label-width="100px">
             <el-input v-model="userForm.company" autocomplete="off" />
           </el-form-item>
@@ -114,6 +132,7 @@ onMounted(async () => {
         <template #footer>
           <div class="dialog-footer">
             <el-button @click="dialogVisible = false">Cancel</el-button>
+
             <el-button type="primary" @click="confirmHandler">
               Confirm
             </el-button>
