@@ -23,9 +23,22 @@ body {
 .page-container {
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 0 30px 30px;
 
   @media (max-width: 372px) {
     padding: 8px;
   }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(800px, 100%);
 }

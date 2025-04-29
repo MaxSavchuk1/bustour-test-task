@@ -5,6 +5,8 @@
     <cookies-setting />
 
     <users-list />
+
+    <todos-list />
   </div>
 </template>
 
